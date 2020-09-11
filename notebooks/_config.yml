@@ -22,7 +22,7 @@ repository:
   path_to_book: notebooks
 
 launch_buttons:
-  notebook_interface: "classic" # The interface interactive links will activate ["classic", "jupyterlab"]
-  binderhub_url: "https://mybinder.org"
+  notebook_interface: "classic"
+  binderhub_url: https://mybinder.org/v2/gh/m2mas-agrocampus/git-markdown-docker/master
   colab_url: "https://colab.research.google.com"
   thebe: true
