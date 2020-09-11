@@ -1,13 +1,12 @@
 - file: intro
 - file: miniconda
-  sections:
-    - file: 01-jupyter
-    - file: 02-gitbasics
-    - file: 03-markdown
-    - file: 04-docker
-    - file: 05-binder
-    - file: 06-jupytext
-    - file: 07-exemple-julia
-    - file: 08-exemple-python
-    - file: 09-exemple-r
-    - file: 10-github-action
+- file: 01-jupyter
+- file: 02-gitbasics
+- file: 03-markdown
+- file: 04-docker
+- file: 05-binder
+- file: 06-jupytext
+- file: 07-exemple-julia
+- file: 08-exemple-python
+- file: 09-exemple-r
+- file: 10-github-action
