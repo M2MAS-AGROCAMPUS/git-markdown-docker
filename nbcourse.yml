@@ -17,12 +17,12 @@ links:
     target: manual.html
   binder:
     title: Exécuter
-    target: https://mybinder.org/v2/git/https%3A%2F%2Fgitlab.math.unistra.fr%2Fnavaro%2Fagrocampus/master?filepath=notebooks
+    target: https://mybinder.org/v2/gh/m2mas-agrocampus/git-markdown-docker/master
   book:
     title: pdf
   gitlab:
     title: Sources
-    target: https://gitlab.math.unistra.fr/pnavaro/agrocampus
+    target: https://github.com/m2mas-agrocampus/git-markdown-docker
   archive:
     title: Archive complète
 license:
