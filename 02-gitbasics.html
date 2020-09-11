@@ -32,11 +32,12 @@
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://m2mas-agrocampus.github.io/git-markdown-docker/02-gitbasics.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Markdown" href="03-markdown.html" />
@@ -45,6 +46,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://m2mas-agrocampus.github.io/git-markdown-docker/02-gitbasics.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Git" />
+<meta property="og:description" content="Git  Git est un logiciel de gestion de versions.  Site officiel https://git-scm.com  Le livre en français https://git-scm.com/book/fr/v2  Pourquoi un gestionnai" />
+<meta property="og:image"       content="https://m2mas-agrocampus.github.io/git-markdown-docker/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
 
 
   </head>
@@ -73,14 +83,7 @@
 </form>
 
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Github-Markdown-Docker
-  </a>
- </li>
-</ul>
-<ul class="current nav sidenav_l1">
+  <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="miniconda.html">
    Miniconda
@@ -189,6 +192,24 @@
 </div>
         <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker/issues/new?title=Issue%20on%20page%20%2F02-gitbasics.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker/edit/master/notebooks/02-gitbasics.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -202,7 +223,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/02-gitbasics.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/M2MAS-AGROCAMPUS/git-markdown-docker/master?urlpath=tree/notebooks/02-gitbasics.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -210,11 +231,14 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/02-gitbasics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/M2MAS-AGROCAMPUS/git-markdown-docker/blob/master/notebooks/02-gitbasics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
         
     </div>
 </div>
@@ -495,7 +519,7 @@
 </div>
 <div class="section" id="gestion-distribuee-des-versions">
 <h2>Gestion distribuée des versions<a class="headerlink" href="#gestion-distribuee-des-versions" title="Permalink to this headline">¶</a></h2>
-<img src="images/git.png" alt="git" width="300px"/>
+<img src="images/git.png" alt="git" class="bg-primary" width="300px"/>
 <ul class="simple">
 <li><p>Chaque membre du projet possède une copie totale du projet</p></li>
 <li><p>On peut contribuer seul ou à plusieurs.</p></li>
@@ -581,7 +605,7 @@ git status
 </div>
 <div class="section" id="les-differents-etats-des-fichiers-dans-la-copie-du-depot">
 <h2>Les différents états des fichiers dans la copie du dépôt<a class="headerlink" href="#les-differents-etats-des-fichiers-dans-la-copie-du-depot" title="Permalink to this headline">¶</a></h2>
-<img src="images/18333fig0201-tn.png" alt="git" width="450px"/></div>
+<img src="images/18333fig0201-tn.png" class="bg-primary" alt="git" width="450px"/></div>
 <div class="section" id="synchroniser-avec-la-version-distante-sur-le-depot">
 <h2>Synchroniser avec la version distante sur le dépôt<a class="headerlink" href="#synchroniser-avec-la-version-distante-sur-le-depot" title="Permalink to this headline">¶</a></h2>
 <p>La commande suivante permet de rappatrier toutes les modifications sur le dépôt distant (remote) sans modifier
@@ -609,7 +633,7 @@ votre version locale. Toutes les branches commencant par “origin/*” seront m
 </div>
 <div class="section" id="git-workflow">
 <h2>Git Workflow<a class="headerlink" href="#git-workflow" title="Permalink to this headline">¶</a></h2>
-<img src="images/four_stages.png" alt="git" width="150px"/></div>
+<img src="images/fourstages.png" alt="git" width="150px"/></div>
 <div class="section" id="fusionner-la-branche-distante-avec-la-branche-locale">
 <h2>Fusionner la branche distante avec la branche locale<a class="headerlink" href="#fusionner-la-branche-distante-avec-la-branche-locale" title="Permalink to this headline">¶</a></h2>
 <p>Si la version distante est en avance sur la version locale, il existe différentes manières de récupérer les modifications:</p>
@@ -901,7 +925,7 @@ git stash show
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "M2MAS-AGROCAMPUS/git-markdown-docker",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -933,7 +957,7 @@ git stash show
     <div class="container">
       <p>
         
-          By Pierre Navaro<br/>
+          By M2MAS AGROCAMPUS<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

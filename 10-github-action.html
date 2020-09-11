@@ -32,11 +32,12 @@
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://m2mas-agrocampus.github.io/git-markdown-docker/10-github-action.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Exemple R" href="09-exemple-r.html" />
@@ -44,6 +45,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
 
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://m2mas-agrocampus.github.io/git-markdown-docker/10-github-action.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Github Action" />
+<meta property="og:description" content="Github Action  Système d’exécution de code automatisé couplé avec un dépôt github, permet de :  Compiler une application  Exécuter des tests et vérifier le fonc" />
+<meta property="og:image"       content="https://m2mas-agrocampus.github.io/git-markdown-docker/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
 
 
   </head>
@@ -72,14 +82,7 @@
 </form>
 
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Github-Markdown-Docker
-  </a>
- </li>
-</ul>
-<ul class="current nav sidenav_l1">
+  <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="miniconda.html">
    Miniconda
@@ -188,6 +191,24 @@
 </div>
         <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker/issues/new?title=Issue%20on%20page%20%2F10-github-action.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/M2MAS-AGROCAMPUS/git-markdown-docker/edit/master/notebooks/10-github-action.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -201,7 +222,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/10-github-action.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/M2MAS-AGROCAMPUS/git-markdown-docker/master?urlpath=tree/notebooks/10-github-action.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -209,11 +230,14 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/10-github-action.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/M2MAS-AGROCAMPUS/git-markdown-docker/blob/master/notebooks/10-github-action.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
         
     </div>
 </div>
@@ -341,7 +365,7 @@ Nommé la clé <code class="docutils literal notranslate"><span class="pre">NBCO
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "M2MAS-AGROCAMPUS/git-markdown-docker",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -372,7 +396,7 @@ Nommé la clé <code class="docutils literal notranslate"><span class="pre">NBCO
     <div class="container">
       <p>
         
-          By Pierre Navaro<br/>
+          By M2MAS AGROCAMPUS<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
