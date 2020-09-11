@@ -1,13 +1,8 @@
----
-title: Miniconda
-parent: manual.md
----
+# Miniconda
 
-## Download
+Téléchargez <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> pour Python 3.
 
-Download <a href="https://docs.conda.io/en/latest/miniconda.html">installer</a> for Python 3.X for your operating system and install it.
-
-On Linux or Mac, open *Terminal* application and type:
+Sur Linux ou Mac, utilisez un *Terminal* :
 
 ```bash
 cd Downloads
