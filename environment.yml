@@ -2,6 +2,7 @@ channels:
   - conda-forge
 dependencies:
   - jupytext
+  - jupyter-book
   - pandas
   - r-irkernel
   - r-ggplot2

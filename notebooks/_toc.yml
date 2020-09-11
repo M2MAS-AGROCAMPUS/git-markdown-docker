@@ -1,4 +1,5 @@
 - file: intro
+- file: miniconda
   sections:
     - file: 01-jupyter
     - file: 02-gitbasics

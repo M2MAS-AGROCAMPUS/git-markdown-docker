@@ -1,4 +1,4 @@
-name: nbcourse
+name: jupyterbook
 on:
   push:
     branches:
@@ -27,12 +27,11 @@ jobs:
         conda env update -f environment.yml -n runenv
         conda run -n runenv python -m ipykernel install --user --name python3
         conda run -n runenv Rscript -e 'IRkernel::installspec() ' 
-        conda run -n base python -m pip install --ignore-installed nbcourse
-    - name: Run nbcourse
+    - name: Run jupyterbook
       shell: bash -l {0}
-      run: conda run -n base nbcourse -n 1
+      run: conda run -n runenv jupyter-book build notebooks
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: build
+        publish_dir: notebooks/_build/html
