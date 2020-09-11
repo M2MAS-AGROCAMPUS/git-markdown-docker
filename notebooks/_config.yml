@@ -6,6 +6,9 @@ latex:
   latex_documents:
     targetname: book.tex
 
+parse:
+  myst_extended_syntax: true
+
 execute:
   execute_notebooks: cache
 
