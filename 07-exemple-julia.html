@@ -273,39 +273,44 @@
 <h2>Documentation de fonction<a class="headerlink" href="#documentation-de-fonction" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    bspline(p, j, x)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">    bspline(p, j, x)</span>
 
-<span class="sd">Return the value at x in [0,1[ of the B-spline with integer nodes of degree p with support starting at j.</span>
-<span class="sd">Implemented recursively using the [De Boor&#39;s Algorithm](https://en.wikipedia.org/wiki/De_Boor%27s_algorithm)</span>
+<span class="s">Return the value at x in [0,1[ of the B-spline with integer nodes of degree p with support starting at j.</span>
+<span class="s">Implemented recursively using the [De Boor&#39;s Algorithm](https://en.wikipedia.org/wiki/De_Boor%27s_algorithm)</span>
 
-<span class="sd">```math</span>
-<span class="sd">B_{i,0}(x) := \\left\\{</span>
-<span class="sd">\\begin{matrix}</span>
-<span class="sd">1 &amp; \\mathrm{if}  \\quad t_i ≤ x &lt; t_{i+1} \\\\</span>
-<span class="sd">0 &amp; \\mathrm{otherwise} </span>
-<span class="sd">\\end{matrix}</span>
-<span class="sd">\\right.</span>
-<span class="sd">```</span>
+<span class="s">```math</span>
+<span class="s">B_{i,0}(x) := </span><span class="se">\\</span><span class="s">left</span><span class="se">\\</span><span class="s">{</span>
+<span class="se">\\</span><span class="s">begin{matrix}</span>
+<span class="s">1 &amp; </span><span class="se">\\</span><span class="s">mathrm{if}  </span><span class="se">\\</span><span class="s">quad t_i ≤ x &lt; t_{i+1} </span><span class="se">\\\\</span><span class="s"></span>
+<span class="s">0 &amp; </span><span class="se">\\</span><span class="s">mathrm{otherwise} </span>
+<span class="se">\\</span><span class="s">end{matrix}</span>
+<span class="se">\\</span><span class="s">right.</span>
+<span class="s">```</span>
 
-<span class="sd">```math</span>
-<span class="sd">B_{i,p}(x) := \\frac{x - t_i}{t_{i+p} - t_i} B_{i,p-1}(x) </span>
-<span class="sd">+ \\frac{t_{i+p+1} - x}{t_{i+p+1} - t_{i+1}} B_{i+1,p-1}(x).</span>
-<span class="sd">```</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">function</span> <span class="n">bspline</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">Int</span><span class="p">,</span> <span class="n">j</span><span class="p">::</span><span class="n">Int</span><span class="p">,</span> <span class="n">x</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
+<span class="s">```math</span>
+<span class="s">B_{i,p}(x) := </span><span class="se">\\</span><span class="s">frac{x - t_i}{t_{i+p} - t_i} B_{i,p-1}(x) </span>
+<span class="s">+ </span><span class="se">\\</span><span class="s">frac{t_{i+p+1} - x}{t_{i+p+1} - t_{i+1}} B_{i+1,p-1}(x).</span>
+<span class="s">```</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">bspline</span><span class="p">(</span><span class="n">p</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span> <span class="n">j</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span> <span class="n">x</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span>
    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span>
        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span>
            <span class="k">return</span> <span class="mf">1.0</span>
        <span class="k">else</span>
            <span class="k">return</span> <span class="mf">0.0</span>
-       <span class="n">end</span>
+       <span class="k">end</span>
    <span class="k">else</span>
        <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
        <span class="n">w1</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
-   <span class="n">end</span>
+   <span class="k">end</span>
    <span class="k">return</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">bspline</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">w1</span><span class="p">)</span> <span class="o">*</span> <span class="n">bspline</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-<span class="n">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bspline
 </pre></div>
 </div>
 </div>
@@ -314,71 +319,127 @@
 <p>?bspline</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Plots</span>
 
-<span class="n">function</span> <span class="n">generate_data</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1234</span> <span class="p">)</span>
+<span class="k">function</span> <span class="n">generate_data</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1234</span> <span class="p">)</span>
     <span class="n">seuil</span> <span class="o">=</span> <span class="mf">0.25</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">MersenneTwister</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="kt">MersenneTwister</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">X1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span> <span class="n">rng</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">X2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span> <span class="n">rng</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">U</span>  <span class="o">=</span> <span class="n">rand</span><span class="p">(</span> <span class="n">rng</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">Y</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">Y</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">Y</span><span class="p">[(</span><span class="n">X1</span> <span class="o">.&lt;=</span> <span class="mf">0.25</span><span class="p">)</span> <span class="o">.&amp;</span> <span class="p">(</span><span class="n">U</span>  <span class="o">.&lt;=</span> <span class="n">seuil</span><span class="p">)]</span> <span class="o">.=</span> <span class="mi">1</span>
     <span class="n">Y</span><span class="p">[(</span><span class="n">X1</span> <span class="o">.&gt;</span>  <span class="mf">0.25</span><span class="p">)</span> <span class="o">.&amp;</span> <span class="p">(</span><span class="n">X2</span> <span class="o">.&gt;=</span> <span class="mf">0.75</span><span class="p">)</span> <span class="o">.&amp;</span> <span class="p">(</span><span class="n">U</span> <span class="o">.&lt;=</span> <span class="n">seuil</span><span class="p">)]</span> <span class="o">.=</span> <span class="mi">1</span>
     <span class="n">Y</span><span class="p">[(</span><span class="n">X1</span> <span class="o">.&gt;</span>  <span class="mf">0.25</span><span class="p">)</span> <span class="o">.&amp;</span> <span class="p">(</span><span class="n">X2</span> <span class="o">.&lt;</span>  <span class="mf">0.75</span><span class="p">)</span> <span class="o">.&amp;</span> <span class="p">(</span><span class="n">U</span> <span class="o">.&gt;</span>  <span class="n">seuil</span><span class="p">)]</span> <span class="o">.=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">Y</span>
-<span class="n">end</span>
+<span class="k">end</span>
 
 <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span> <span class="n">marker_z</span> <span class="o">=</span> <span class="n">Y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1278
+</pre></div>
+</div>
+<img alt="_images/07-exemple-julia_4_1.svg" src="_images/07-exemple-julia_4_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">StatsPlots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">StatsPlots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
+└ @ Base loading.jl:1278
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling StatsPlots [f3b207a7-027a-5e70-b257-86293d7955fd]
+└ @ Base loading.jl:1278
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">X1</span><span class="o">=</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="o">=</span><span class="n">X2</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">X1</span><span class="o">=</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="o">=</span><span class="n">X2</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
 <span class="n">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>X1</th><th>X2</th><th>Y</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Int64</th></tr></thead><tbody><p>6 rows × 3 columns</p><tr><th>1</th><td>0.590845</td><td>0.612889</td><td>1</td></tr><tr><th>2</th><td>0.766797</td><td>0.523674</td><td>1</td></tr><tr><th>3</th><td>0.566237</td><td>0.795861</td><td>0</td></tr><tr><th>4</th><td>0.460085</td><td>0.793631</td><td>0</td></tr><tr><th>5</th><td>0.794026</td><td>0.781348</td><td>0</td></tr><tr><th>6</th><td>0.854147</td><td>0.997615</td><td>0</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@df</span> <span class="n">data</span> <span class="n">scatter</span><span class="p">(:</span><span class="n">X1</span><span class="p">,:</span><span class="n">X2</span><span class="p">,</span> <span class="n">zcolor</span><span class="o">=</span> <span class="p">:</span><span class="n">Y</span><span class="p">,</span> <span class="n">xaxis</span> <span class="o">=</span> <span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;X2&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@df</span> <span class="n">data</span> <span class="n">scatter</span><span class="p">(</span><span class="o">:</span><span class="n">X1</span><span class="p">,</span><span class="o">:</span><span class="n">X2</span><span class="p">,</span> <span class="n">zcolor</span><span class="o">=</span> <span class="o">:</span><span class="n">Y</span><span class="p">,</span> <span class="n">xaxis</span> <span class="o">=</span> <span class="s">&quot;X1&quot;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&quot;X2&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s">&quot;Y&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/07-exemple-julia_7_0.svg" src="_images/07-exemple-julia_7_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">[x1,x2,x1^2,x1x2,x2^2……x2^6]</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">function</span> <span class="n">map_features</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">[x1,x2,x1^2,x1x2,x2^2……x2^6]</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">map_features</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">)</span>
     <span class="n">degree</span> <span class="o">=</span> <span class="mi">6</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">X1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))</span>
-    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span>
-        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">X1</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">6</span>
+        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="n">i</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">out</span><span class="p">,(</span><span class="n">X1</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">X2</span><span class="o">.^</span><span class="n">j</span><span class="p">))</span>
-        <span class="n">end</span>
-    <span class="n">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
     <span class="k">return</span> <span class="n">out</span>
-<span class="n">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>map_features
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">map_features</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">map_features</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">X2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000×28 Array{Float64,2}:
+ 1.0  0.590845   0.612889   …  0.0492577    0.0510955   0.0530019
+ 1.0  0.766797   0.523674      0.0442187    0.0301986   0.0206237
+ 1.0  0.566237   0.795861      0.128631     0.180795    0.254111
+ 1.0  0.460085   0.793631      0.0839754    0.144855    0.249869
+ 1.0  0.794026   0.781348      0.234988     0.231236    0.227544
+ 1.0  0.854147   0.997615   …  0.72263      0.844007    0.985772
+ 1.0  0.200586   0.748584      0.0126347    0.0471525   0.175972
+ 1.0  0.298614   0.874355      0.0521161    0.152598    0.446814
+ 1.0  0.246837   0.789279      0.0236453    0.0756075   0.24176
+ 1.0  0.579672   0.957212      0.282097     0.465826    0.769219
+ 1.0  0.648882   0.993974   …  0.41099      0.629565    0.964383
+ 1.0  0.0109059  0.662258      2.28787e-5   0.00138931  0.0843653
+ 1.0  0.066423   0.199035      6.92392e-6   2.07473e-5  6.21688e-5
+ ⋮                          ⋱  ⋮                        
+ 1.0  0.324239   0.52499       0.00798606   0.0129306   0.0209365
+ 1.0  0.212307   0.932708      0.0341125    0.149863    0.658378
+ 1.0  0.283677   0.325751   …  0.000906137  0.00104053  0.00119486
+ 1.0  0.449907   0.798595      0.0823287    0.146135    0.259393
+ 1.0  0.738609   0.115767      9.7987e-5    1.53581e-5  2.40718e-6
+ 1.0  0.843694   0.401829      0.0185582    0.00883877  0.00420968
+ 1.0  0.961207   0.994582      0.904058     0.935449    0.967929
+ 1.0  0.18979    0.707301   …  0.00901499   0.0335966   0.125206
+ 1.0  0.715862   0.608648      0.0703272    0.0597944   0.050839
+ 1.0  0.556191   0.0761294     1.0391e-5    1.42229e-6  1.94677e-7
+ 1.0  0.581357   0.0987939     3.21964e-5   5.47135e-6  9.29783e-7
+ 1.0  0.151444   0.430456      0.000787447  0.00223819  0.00636171
 </pre></div>
 </div>
 </div>
