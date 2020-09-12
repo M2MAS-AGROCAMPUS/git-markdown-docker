@@ -252,13 +252,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exemple">
-   Exemple
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creation-d-une-paire-de-cles-public-privee">
-   Création d’une paire de clés public/privée
+  <a class="reference internal nav-link" href="#creation-du-jupyterbook">
+   Creation du JupyterBook
   </a>
  </li>
 </ul>
@@ -279,9 +274,12 @@
 <li><p>Exécuter des tests et vérifier le fonctionnement d’une application</p></li>
 <li><p>Contruire une documentation en html ou pdf</p></li>
 </ul>
-<div class="section" id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Permalink to this headline">¶</a></h2>
-<p>Outils informatiques pour le big-data <a class="reference external" href="http://pnavaro.github.io/big-data">http://pnavaro.github.io/big-data</a></p>
+<div class="section" id="creation-du-jupyterbook">
+<h2>Creation du JupyterBook<a class="headerlink" href="#creation-du-jupyterbook" title="Permalink to this headline">¶</a></h2>
+<p>Pour générer le site web <a class="reference external" href="https://m2mas-agrocampus.github.io/git-markdown-docker">https://m2mas-agrocampus.github.io/git-markdown-docker</a></p>
+<p>J’utilise les GitHub actions et voici le script placé dans le répertoire
+<code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code></p>
+<p>Cette action se déclenche pour chaque <code class="docutils literal notranslate"><span class="pre">push</span></code> sur la branche <code class="docutils literal notranslate"><span class="pre">master</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Build and Deploy</span>
 <span class="nt">on</span><span class="p">:</span>
   <span class="nt">push</span><span class="p">:</span>
@@ -289,6 +287,14 @@
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Le <code class="docutils literal notranslate"><span class="pre">runner</span></code> choisi est une VM ubuntu, attention beaucoup de logiciels sont déjà installés. Voir https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md</p></li>
+<li><p>Nous avons besoin de <code class="docutils literal notranslate"><span class="pre">pandoc</span></code> pour transformer le <code class="docutils literal notranslate"><span class="pre">markdown</span></code> en <code class="docutils literal notranslate"><span class="pre">html</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Checkout</span></code> permet de copier le dépôt sur le <code class="docutils literal notranslate"><span class="pre">runner</span></code></p></li>
+<li><p>Nous avons besoin de Julia et d’installer quelques packages</p></li>
+<li><p>Miniconda est déjà installé, utilisons le fichier <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> pour installer les dépendances.</p></li>
+<li><p>L’ensemble des fichiers <code class="docutils literal notranslate"><span class="pre">html</span></code> créés par <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code> est “poussé” sur la branche <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code></p></li>
+</ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">jobs</span><span class="p">:</span>
   <span class="nt">build-and-deploy</span><span class="p">:</span>
     <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
@@ -296,68 +302,34 @@
     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install pandoc</span>
       <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
         <span class="no">sudo apt-get -yq update</span>
-        <span class="no">sudo apt-get install -yq pandoc texlive-xetex texlive-fonts-extra graphviz</span>
+        <span class="no">sudo apt-get install -yq pandoc texlive-xetex texlive-fonts-extra inkscape</span>
     <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout</span>
       <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
       <span class="nt">with</span><span class="p">:</span>
         <span class="nt">persist-credentials</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install SSH Client</span>
-      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">webfactory/ssh-agent@v0.2.0</span>
-      <span class="nt">with</span><span class="p">:</span>
-        <span class="nt">ssh-private-key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.NBCOURSE_PRIV }}</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up JDK 1.8</span>
-      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v1</span>
-      <span class="nt">with</span><span class="p">:</span>
-        <span class="nt">java-version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.8</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Download Apache Spark</span>
-      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">wei/wget@v1</span>
-      <span class="nt">with</span><span class="p">:</span>
-        <span class="nt">args</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://downloads.apache.org/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Apache Spark</span>
-      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tar zxf spark-3.0.0-bin-hadoop2.7.tgz</span>
-    <span class="p p-Indicator">-</span> <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Actions-R-Us/default-env@v1</span>
-      <span class="nt">env</span><span class="p">:</span>
-        <span class="nt">SPARK_HOME</span><span class="p">:</span> <span class="s">&#39;/home/runner/spark-3.0.0-bin-hadoop2.7&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Miniconda and dependencies</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Julia</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">julia -e &#39;using Pkg; Pkg.add([&quot;IJulia&quot;,&quot;Plots&quot;,&quot;StatsPlots&quot;,&quot;DataFrames&quot;]); Pkg.build(&quot;IJulia&quot;)&#39;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install Miniconda</span>
       <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">goanpeca/setup-miniconda@v1</span>
       <span class="nt">with</span><span class="p">:</span>
         <span class="nt">miniconda-version</span><span class="p">:</span> <span class="s">&quot;latest&quot;</span>
-        <span class="nt">activate-environment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">big-data</span>
-        <span class="nt">environment-file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">environment.yml</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install nbcourse</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
       <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bash -l {0}</span>
       <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">conda run -n big-data python -m ipykernel install --user --name big-data</span>
-        <span class="no">conda run -n base python -m pip install nbcourse</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Run nbcourse</span>
+        <span class="no">conda env update -f environment.yml -n runenv</span>
+        <span class="no">conda run -n runenv python -m ipykernel install --user --name python3</span>
+        <span class="no">conda run -n runenv make</span>
+        <span class="no">conda run -n runenv Rscript -e &#39;IRkernel::installspec() &#39;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Run jupyterbook</span>
       <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bash -l {0}</span>
-      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda run -n base nbcourse -n 1</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy on github</span>
-      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">JamesIves/github-pages-deploy-action@releases/v3</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda run -n runenv jupyter-book build notebooks</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">peaceiris/actions-gh-pages@v3.6.1</span>
       <span class="nt">with</span><span class="p">:</span>
-        <span class="nt">SSH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-        <span class="nt">BRANCH</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gh-pages</span>
-        <span class="nt">FOLDER</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+        <span class="nt">github_token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+        <span class="nt">publish_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notebooks/_build/html</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="creation-d-une-paire-de-cles-public-privee">
-<h2>Création d’une paire de clés public/privée<a class="headerlink" href="#creation-d-une-paire-de-cles-public-privee" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -N <span class="s2">&quot;&quot;</span> -f ma_cle
-</pre></div>
-</div>
-<p>2 fichiers sont créés, la clé privée: ma_cle, et la clé publique ma_cle.pub.</p>
-<p>Aller sur GitHub et votre dépôt, dans l’onglet <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Secret</span></code> puis <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">new</span> <span class="pre">secret</span></code>,
-Nommé le secret <code class="docutils literal notranslate"><span class="pre">NBCOURSE_PRIV</span></code> et copier le contenu de la clé privée.</p>
-<p>Dans l’onglet <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">&gt;</span> <span class="pre">Deploy</span> <span class="pre">keys</span></code> cliquer sur <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">deploy</span> <span class="pre">key</span></code>,
-Nommé la clé <code class="docutils literal notranslate"><span class="pre">NBCOURSE_PUB</span></code> et copier le contenu de la clé publique (ma_cle.pub).</p>
-<p><strong>IMPORTANT</strong> : Cocher la case à coté de <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">write</span> <span class="pre">access</span></code>.</p>
 </div>
 </div>
 
