@@ -1,3 +1,4 @@
+name: runenv
 channels:
   - conda-forge
 dependencies:
