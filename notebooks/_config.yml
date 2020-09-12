@@ -10,7 +10,7 @@ parse:
   myst_extended_syntax: true
 
 execute:
-  execute_notebooks: cache
+  timeout: 300
 
 html:
   home_page_in_navbar: false
@@ -29,3 +29,4 @@ launch_buttons:
   binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
   thebe: true
+
