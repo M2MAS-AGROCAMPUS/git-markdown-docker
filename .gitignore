@@ -12,3 +12,4 @@ Manifest.toml
 *.swp
 notebooks/_build/
 .doit.db.db
+notebooks/*.ipynb
