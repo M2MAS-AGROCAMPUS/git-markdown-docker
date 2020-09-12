@@ -247,7 +247,11 @@ def f(tau):
     plt.plot(t, 1 - np.exp(-t/tau), t,  np.exp(-t/tau))
     plt.xlim(0, 1)
     plt.ylim(0, 1)
-# ## Remarque importante
+
+
+# -
+
+# ## Remarques importantes
 #
 # - Un calepin Jupyter n'est pas vraiment un programme Python
 # - Il s'agit d'une suite d'instructions exécutées dans un ordre particulier avec éventuellement des répétitions.

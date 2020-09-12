@@ -26,9 +26,16 @@ Système d'exécution de code automatisé couplé avec un dépôt github, permet
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-## Exemple 
+## Creation du JupyterBook
 
-Outils informatiques pour le big-data <http://pnavaro.github.io/big-data>
+Pour générer le site web <https://m2mas-agrocampus.github.io/git-markdown-docker>
+
+J'utilise les GitHub actions et voici le script placé dans le répertoire
+`.github/workflows/`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+Cette action se déclenche pour chaque `push` sur la branche `master`
 
 ```yaml
 name: Build and Deploy
@@ -39,6 +46,13 @@ on:
 ```
 <!-- #endregion -->
 
+- Le `runner` choisi est une VM ubuntu, attention beaucoup de logiciels sont déjà installés. Voir https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md
+- Nous avons besoin de `pandoc` pour transformer le `markdown` en `html`
+- `Checkout` permet de copier le dépôt sur le `runner`
+- Nous avons besoin de Julia et d'installer quelques packages
+- Miniconda est déjà installé, utilisons le fichier `environment.yml` pour installer les dépendances.
+- L'ensemble des fichiers `html` créés par `jupyter-book` est "poussé" sur la branche `gh-pages`
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ```yaml
 jobs:
@@ -48,82 +62,35 @@ jobs:
     - name: Install pandoc
       run: |
         sudo apt-get -yq update
-        sudo apt-get install -yq pandoc texlive-xetex texlive-fonts-extra graphviz
+        sudo apt-get install -yq pandoc texlive-xetex texlive-fonts-extra inkscape
     - name: Checkout
       uses: actions/checkout@v2
       with:
         persist-credentials: false
-```
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-```yaml
-    - name: Install SSH Client
-      uses: webfactory/ssh-agent@v0.2.0
-      with:
-        ssh-private-key: ${{ secrets.NBCOURSE_PRIV }}
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-```       
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-```yaml
-    - name: Download Apache Spark
-      uses: wei/wget@v1
-      with:
-        args: https://downloads.apache.org/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz
-    - name: Install Apache Spark
-      run: tar zxf spark-3.0.0-bin-hadoop2.7.tgz
-    - uses: Actions-R-Us/default-env@v1
-      env:
-        SPARK_HOME: '/home/runner/spark-3.0.0-bin-hadoop2.7'
-```
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-```yaml
-    - name: Install Miniconda and dependencies
+    - name: Install Julia
+      run: julia -e 'using Pkg; Pkg.add(["IJulia","Plots","StatsPlots","DataFrames"]); Pkg.build("IJulia")'
+    - name: Install Miniconda
       uses: goanpeca/setup-miniconda@v1
       with:
         miniconda-version: "latest"
-        activate-environment: big-data
-        environment-file: environment.yml
-    - name: Install nbcourse
+    - name: Install dependencies
       shell: bash -l {0}
       run: |
-        conda run -n big-data python -m ipykernel install --user --name big-data
-        conda run -n base python -m pip install nbcourse
-    - name: Run nbcourse
+        conda env update -f environment.yml -n runenv
+        conda run -n runenv python -m ipykernel install --user --name python3
+        conda run -n runenv make
+        conda run -n runenv Rscript -e 'IRkernel::installspec() '
+    - name: Run jupyterbook
       shell: bash -l {0}
-      run: conda run -n base nbcourse -n 1
-    - name: Deploy on github
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      run: conda run -n runenv jupyter-book build notebooks
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3.6.1
       with:
-        SSH: true
-        BRANCH: gh-pages
-        FOLDER: build
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: notebooks/_build/html
 ```
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Création d'une paire de clés public/privée
+```python
 
-```bash
-ssh-keygen -N "" -f ma_cle
 ```
-
-2 fichiers sont créés, la clé privée: ma_cle, et la clé publique ma_cle.pub.
-
-Aller sur GitHub et votre dépôt, dans l'onglet `Settings > Secret` puis `Add new secret`,
-Nommé le secret `NBCOURSE_PRIV` et copier le contenu de la clé privée.
-
-Dans l'onglet `Settings > Deploy keys` cliquer sur `Add deploy key`,
-Nommé la clé `NBCOURSE_PUB` et copier le contenu de la clé publique (ma_cle.pub).
-
-**IMPORTANT** : Cocher la case à coté de `Enable write access`.
-
-
-<!-- #endregion -->

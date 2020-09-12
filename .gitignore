@@ -13,3 +13,4 @@ Manifest.toml
 notebooks/_build/
 .doit.db.db
 notebooks/*.ipynb
+.ipynb_checkpoints/

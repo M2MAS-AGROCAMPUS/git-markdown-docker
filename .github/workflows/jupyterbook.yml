@@ -21,10 +21,12 @@ jobs:
       uses: goanpeca/setup-miniconda@v1
       with:
         miniconda-version: "latest"
+          activate-environment: runenv
+          environment-file: environment.yml
+          auto-activate-base: false
     - name: Install dependencies
       shell: bash -l {0}
       run: |
-        conda env update -f environment.yml -n runenv
         conda run -n runenv python -m ipykernel install --user --name python3
         conda run -n runenv make
         conda run -n runenv Rscript -e 'IRkernel::installspec() ' 

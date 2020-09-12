@@ -1,17 +1,16 @@
 ---
-jupyter:
-  jupytext:
-    cell_metadata_filter: -all
-    formats: md,notebooks//ipynb
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.6.0
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
+jupytext:
+  cell_metadata_filter: -all
+  formats: notebooks//ipynb,md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.12
+    jupytext_version: 1.6.0
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
 ---
 
 # Markdown
@@ -20,14 +19,17 @@ La langage [Markdown](https://www.markdownguide.org) est un système de formatag
 
 Le format html utilise un système de balises qui rend le texte peu lisible. Le format rst est plus lisible avec son système de balisage plus léger. Il est utilisé notamment pour la documentation du langage Python mais son utilisation est moins répandu que le markdown. 
 
++++
 
 La documentation des fonctions Julia est en markdown. Il n'y a pas de système de documentation intégré pour la langage R mais [roxygen2](https://cran.r-project.org/web/packages/roxygen2/) est le package utilisé. La syntaxe a des similarités avec [LaTeX](https://fr.wikipedia.org/wiki/LaTeX)
 
++++
 
 Les fichiers markdown sont identifiés par la terminaison `.md`.
 
 Dans les exemples qui vont suivre, je présente les bases du langage markdown. Il faut savoir qu'il existe un grand nombre de dialectes. Github propose des fonctionalités enrichies. Pour voir toutes les possibilités, je conseille d'aller regarder la démonstration de l'éditeur en ligne [codimd](https://demo.codimd.org/features).
 
++++
 
 ## Titres
 
@@ -47,16 +49,18 @@ Section
 ---------
 ```
 
++++
 
 ## **Gras**, *italique*, `script`
 
 
-
++++
 
 ## Citation
 
 > Labore ipsum quisquam labore.
 
++++
 
 ## Liste
 - Fruits
@@ -68,7 +72,7 @@ Section
 
 
 
-
++++
 
 ## Liste ordonnée
 
@@ -77,7 +81,7 @@ Section
 3. Mercredi
 
 
-
++++
 
 <ol>
 <li>Jeudi</li>
@@ -86,6 +90,7 @@ Section
 <li>Dimanche</li>
 </ol>
 
++++
 
 ## Code R
 
@@ -99,6 +104,7 @@ X <- as.matrix(cbind(x0,x1,x2))
 beta = solve(crossprod(X), crossprod(X,y))
 ```
 
++++
 
 ## Code Python
 
@@ -113,6 +119,7 @@ Y = y[:, np.newaxis]
 beta = np.linalg.solve(X.T @ X, X.T @ Y)
 ```
 
++++
 
 ## Code Julia
 
@@ -127,6 +134,7 @@ Y = y
 beta = X'X \ X'y
 ```
 
++++
 
 ## Lignes de séparation
 
@@ -141,19 +149,23 @@ Il y a plusieurs possibilités, préférez les versions avec les espaces car cel
 *    *    *
 ```
 
++++
 
 ## Images
 
-<!-- #region -->
-```markdown
++++
+
+~~~
 ![texte alt](https://www.agrocampus-ouest.fr/files/images/logos/header/logo-agrocampus-ouest.png "Logo Agrocampus")
 
 ![Logo Agrocampus](https://www.agrocampus-ouest.fr/files/images/logos/header/logo-agrocampus-ouest.png)
-```
-<!-- #endregion -->
+~~~
+
++++
 
 ![Logo Agrocampus](images/logo-agrocampus-ouest.png)
 
++++
 
 ## Liens
 
@@ -161,7 +173,7 @@ Il y a plusieurs possibilités, préférez les versions avec les espaces car cel
 
 [Lien vers le logo](images/logo-agrocampus-ouest.png "le logo!")
 
-
++++
 
 ## Tableaux
 
@@ -177,6 +189,7 @@ Colonne 1 | Colonne 2 | Colonne 3
 Pomme | Banane | Orange
 1 | 2 | 3
 
++++
 
 ## Equations
 Les mathématiques sont écrites en langage LaTeX
@@ -185,6 +198,7 @@ $$
 \text{Dist}(G):=\bigcup_{n\ge 0} \text{Dist}_n(G).
 $$
 
++++
 
 \begin{align}
 \frac{d x_1(t) }{dt} &= \frac{1}{\varepsilon}v_1(t)  &\qquad \frac{d v_1(t) }{dt} &= E_1(t, x(t)) + \frac{1}{\varepsilon}v_2(t)\\
@@ -192,6 +206,7 @@ $$
 \frac{d x_3(t) }{dt} &= v_3(t)                       &\qquad \frac{d v_3(t) }{dt} &= E_3(t, x(t)) 
 \end{align}
 
++++
 
 $$
 \left(
@@ -203,6 +218,7 @@ g & h & i
 \right)
 $$
 
++++
 
 $$
 \begin{bmatrix}
@@ -212,5 +228,6 @@ g & h & i
 \end{bmatrix}
 $$
 
++++
 
 Les fonctionnalités peuvent être plus riches avec des emojis par example. Voir [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
