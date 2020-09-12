@@ -57,11 +57,6 @@ end
 
 # ?bspline
 
-using Pkg
-Pkg.add("Plots")
-Pkg.add("DataFrames")
-Pkg.add("StatsPlots");
-
 # +
 using Random, Plots
 
