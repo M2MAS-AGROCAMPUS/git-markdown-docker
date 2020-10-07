@@ -1,10 +1,11 @@
 pages:
   image: pnavaro/jupyter
   script:
-    - julia --project -e 'import Pkg; Pkg.instantiate()'
-    - pip install nbcourse
-    - nbcourse -n 1
-    - mv build public
+    - julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")'
+    - pip install jupyter-book
+    - make
+    - jupyter-book build notebooks
+    - mv notebooks/_build/html public
   tags:
     - docker
     - pages
