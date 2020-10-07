@@ -60,7 +60,7 @@
     <link rel="canonical" href="https://m2mas-agrocampus.github.io/git-markdown-docker/intro.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Miniconda" href="miniconda.html" />
+    <link rel="next" title="Jupyter" href="01-jupyter.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -70,7 +70,7 @@
 <meta property="og:url"         content="https://m2mas-agrocampus.github.io/git-markdown-docker/intro.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Github-Markdown-Docker" />
-<meta property="og:description" content="Github-Markdown-Docker  Bonnes pratiques numériques pour un travail collaboratif en sciences des données.  " />
+<meta property="og:description" content="Github-Markdown-Docker  Bonnes pratiques numériques pour un travail collaboratif en sciences des données.  Miniconda  Téléchargez &lt;a href=&#34;https://docs.conda.io" />
 <meta property="og:image"       content="https://m2mas-agrocampus.github.io/git-markdown-docker/_static/logo.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -103,11 +103,6 @@
 
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="miniconda.html">
-   Miniconda
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="01-jupyter.html">
    Jupyter
@@ -243,6 +238,20 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#miniconda">
+   Miniconda
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -253,7 +262,48 @@
   <div class="section" id="github-markdown-docker">
 <h1>Github-Markdown-Docker<a class="headerlink" href="#github-markdown-docker" title="Permalink to this headline">¶</a></h1>
 <p>Bonnes pratiques numériques pour un travail collaboratif en sciences des données.</p>
+<div class="section" id="miniconda">
+<h2>Miniconda<a class="headerlink" href="#miniconda" title="Permalink to this headline">¶</a></h2>
+<p>Téléchargez <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> pour Python 3.</p>
+<p>Sur Linux ou Mac, utilisez un <em>Terminal</em> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> Downloads
+bash ./Miniconda*.sh
+</pre></div>
+</div>
+<p>Configuration du channel <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge 
+conda config --set channel_priority strict 
+</pre></div>
+</div>
+<p>Installation de <code class="docutils literal notranslate"><span class="pre">mamba</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install mamba
+</pre></div>
+</div>
+<p>Création de l’environnement <code class="docutils literal notranslate"><span class="pre">book</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba create <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7 -n book
+conda activate book
+</pre></div>
+</div>
+<p>Installation de <code class="docutils literal notranslate"><span class="pre">jupytext</span></code> avec mamba</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba install jupytext
+</pre></div>
+</div>
+<p>Installation de jupyter-book avec pip</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install jupyter-book
+</pre></div>
+</div>
+<p>Construction du Jupyter Book</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupytext</span> <span class="o">--</span><span class="n">sync</span> <span class="o">*-*</span>
+<span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="n">notebooks</span>
+</pre></div>
+</div>
+<p>Pour voir un appercu du site web généré</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> notebooks/build/html
+python3 -m http.server 
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -285,7 +335,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="miniconda.html" title="next page">Miniconda</a>
+    <a class='right-next' id="next-link" href="01-jupyter.html" title="next page">Jupyter</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
