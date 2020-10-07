@@ -7,7 +7,7 @@ Bonnes pratiques numériques pour un travail collaboratif en sciences des donné
 
 Téléchargez <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> pour Python 3.
 
-Sur Linux ou Mac, utilisez un *Terminal* :
+Sur Windows, l'installation d'anaconda vous donnera accès à `Anaconda prompt`. Sur Linux ou Mac, utilisez un *Terminal* :
 
 ```bash
 cd Downloads
@@ -53,8 +53,8 @@ jupytext --sync *-*
 jupyter-book build notebooks
 ```
 
-Pour voir un appercu du site web généré
+Pour voir le site web généré <http://localhost:8000>
 ```bash
-cd notebooks/build/html
+notebooks/_build/html/
 python3 -m http.server 
 ```
