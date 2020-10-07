@@ -2,7 +2,7 @@ pages:
   image: pnavaro/jupyter  # https://github.com/pnavaro/dockerfiles
   script:
     - julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")'
-    - pip install jupyter-book
+    - pip install jupyter-book jupytext
     - make
     - jupyter-book build notebooks
     - mv notebooks/_build/html public
