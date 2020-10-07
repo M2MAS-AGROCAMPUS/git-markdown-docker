@@ -44,7 +44,7 @@ pip install jupyter-book
 Construction du Jupyter Book
 
 ```
-jupytext --set-formats=md,notebooks//ipynb --sync *-*.md
+jupytext --sync *-*
 jupyter-book build notebooks
 ```
 
