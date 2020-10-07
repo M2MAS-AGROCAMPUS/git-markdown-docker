@@ -1,5 +1,5 @@
 pages:
-  image: pnavaro/jupyter
+  image: pnavaro/jupyter  # https://github.com/pnavaro/dockerfiles
   script:
     - julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.build("IJulia")'
     - pip install jupyter-book
