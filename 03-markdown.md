@@ -1,7 +1,7 @@
 ---
 jupytext:
   cell_metadata_filter: -all
-  formats: notebooks//ipynb,md:myst
+  formats: md:myst,notebooks//ipynb
   text_representation:
     extension: .md
     format_name: myst
@@ -17,7 +17,7 @@ kernelspec:
 
 La langage [Markdown](https://www.markdownguide.org) est un système de formatage de texte. Il est similaire au format [html](https://html.spec.whatwg.org/multipage/) utilisé pour éditer les pages hébergées sur un serveur web et le format [reStructuredText](https://docutils.sourceforge.io/rst.html) que l'on retrouve dans les wikis. 
 
-Le format html utilise un système de balises qui rend le texte peu lisible. Le format rst est plus lisible avec son système de balisage plus léger. Il est utilisé notamment pour la documentation du langage Python mais son utilisation est moins répandu que le markdown. 
+Le format html utilise un système de balises qui rend le texte peu lisible. Le format rst est plus lisible avec son système de balisage plus léger. Il est utilisé notamment pour la documentation du langage Python mais son utilisation est moins répandu que le markdown.
 
 +++
 
@@ -53,7 +53,6 @@ Section
 
 ## **Gras**, *italique*, `script`
 
-
 +++
 
 ## Citation
@@ -70,8 +69,6 @@ Section
     * Aubergines
     * Courgettes
 
-
-
 +++
 
 ## Liste ordonnée
@@ -79,7 +76,6 @@ Section
 1. Lundi
 2. Mardi
 3. Mercredi
-
 
 +++
 
