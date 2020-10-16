@@ -28,8 +28,10 @@ Le livre en français https://git-scm.com/book/fr/v2
 - Toutes les modifications sont enregistrées.
 - A tout moment vous pouvez revenir sur une version précédente.
 - Vous pouvez l'utiliser pour quasiment tous les types de fichier.
-- C'est la meilleure approche pour collaborer sur un document.
+- C'est la meilleure approche pour collaborer sur un document tex.
 - Chaque modification est identifiée et datée.
+- Ne convient pas aux fichiers volumineux souvent modifiés
+- N'est pas adapté aux formats non lisibles en mode texte comme le pdf, word ou excel.
 
 
 ## GitHub
@@ -40,7 +42,17 @@ Le livre en français https://git-scm.com/book/fr/v2
 - Github est la plus grande bibliothèque de codes du monde et on y retrouve les meilleures développeurs.
 - Fonctionne de plus en plus comme un réseau social et offre une grande visibilité à vos travaux.
 
-Services équivalents: [Gitlab.com](https://about.gitlab.com) et [Bitbucket](https://bitbucket.org)
+Service équivalent: [Bitbucket](https://bitbucket.org)
+
+## Gitlab
+
+- Forge officielle : [Gitlab.com](https://about.gitlab.com) 
+- Gitlab permet d'herberger sa propre instance.
+- Beaucoup d'institutions proposent des instances Gitlab
+   * PLM <https://plmlab.math.cnrs.fr> (pages, CI)
+   * INRIA <https://gitlab.inria.fr> (pages, CI)
+   * Université de Rennes 1 <https://gitlab.univ-rennes1.fr> (~~pages~~, ~~CI~~)
+   * INSA Rennes <https://gitlab.insa-rennes.fr>(~~pages~~, ~~CI~~)
 
 
 ## Gestion distribuée des versions
@@ -62,27 +74,28 @@ Ouvrir la console « Git bash »:
 
 <!-- #region -->
 ```bash
-git config --global user.name “Prenom Nom"
-git config --global user.email “prenom.nom@domaine.fr"
+git config --global user.name “Pierre Navaro"
+git config --global user.email “pierre.navaro@univ-rennes1.fr`
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 Utiliser la même adresse que pour votre compte GitHub. Verifier la configuration avec:
 
+<!-- #region -->
 ```bash
 git config --list
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 ## Créer sa clé SSH
 
 Saisissez la ligne suivante dans le git bash:
 
+<!-- #region -->
 ```bash
 ssh-keygen
 ```
+<!-- #endregion -->
 
 Valider les questions suivantes :
 
@@ -97,37 +110,51 @@ Enter passphrase (empty for no passphrase):
 
 Appuyer sur "enter" (conseillé) ou saisir un mot de passe.  Deux fichiers on été créés : un clé publique et une clé privée. La clé publique sera celle que l'on pourra partager et la clé privée ne doit être communiquée sous aucun prétexte, elle est comme un mot de passe. Si vous la perdez vous devrez recommencer la procédure.
 
-<!-- #endregion -->
 
-## Créer votre compte GitHub
+## Créer votre compte GitHub et GitLab
 
-Il suffit de cliquer en haut à droite sur `Sign Up`. Ajouter votre clé publique dans votre profile (Settings -> SSH and GPG keys -> New SSH key)
+GitHub: Il suffit de cliquer en haut à droite sur `Sign Up`. Ajouter votre clé publique dans votre profile (Settings -> SSH and GPG keys -> New SSH key)
 
-Une fois que le compte a été créé allez sur le dépot <https://github.com/pnavaro/agrocampus> et cliquez sur `Fork` en haut à droite.
+Gitlab: En haut à droite, dans le profile il y a un menu `Settings` qui contient un onglet `SSH Keys`.
 
-Vous aurez une copie de ces transparents sur votre compte GitHub que vous pourrez modifier.
+## Clonage d'un dépôt git
 <!-- #region -->
-## Clonage du dépôt
-
 ```bash
-git clone https://github.com/{GITHUB_LOGIN}/agrocampus.git
+git clone git@plmlab.math.cnrs.fr:irmar/git-markdown-docker.git
+ls git-markdown-docker
+```
+<!-- #endregion -->
+Vous aurez une copie de ces transparents sur votre ordinateur.
+
+## Mettre en place un dépôt git local
+
+Créons un nouveau répertoire où nous nous allons ajouter un fichier README:
+
+<!-- #region -->
+```bash
+cd $HOME
+mkdir monprojet
+cd monprojet
+touch README.md
+echo "# Mon Projet " >> README.md
+ls
 ```
 <!-- #endregion -->
 
+Création du dépôt git:
 <!-- #region -->
-## Verifier l'état du dépôt et les fichiers modifiés
-
 ```bash
-cd agrocampus
+git init
 git status
 ```
 <!-- #endregion -->
+
 
 ## Ajouter un fichier dans l'index
 
 <!-- #region -->
 ```bash
-touch test.md
+touch index.m`
 ```
 <!-- #endregion -->
 
@@ -141,7 +168,8 @@ La commande `add` est nécessaire pour un nouveau fichier mais aussi pour un fic
 
 <!-- #region -->
 ```bash
-git add test.md
+git add index.md
+echo "# Titre du projet" >> index.md
 ```
 <!-- #endregion -->
 
@@ -151,11 +179,11 @@ git status
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 ## Validation et sauvegarde (commit)
 
+<!-- #region -->
 ```bash
-git commit -m 'Create the file touch.md'
+git commit -m 'Create the file index.md'
 ```
 <!-- #endregion -->
 
@@ -169,9 +197,31 @@ git status
   
 <img src="images/18333fig0201-tn.png" class="bg-primary" alt="git" width="450px"/>
 
+## Mettre le dépôt sur GitHub
+
+Créer un dépot github, que nous appelerons `mon_projet` :
+- Cliquer sur le '+' en haut à droite et "New repository"
+- Repository name = "mon_projet"
+- Laisser les options par défaut
+- Cliquer sur "Create repository"
+
+<!-- #region -->
+```bash
+git remote add origin git@github.com:{GITHUB_LOGIN}/mon_projet.git
+git push -u origin master
+```
+<!-- #endregion -->
+Remplacer `{GITHUB_LOGIN}` par votre login github.
+
+<!-- #region -->
+```bash
+git status
+```
+<!-- #endregion -->
 
 ## Synchroniser avec la version distante sur le dépôt
 
+Vous pouvez modifier les fichiers directement sur le site GitHub.
 La commande suivante permet de rappatrier toutes les modifications sur le dépôt distant (remote) sans modifier
 votre version locale. Toutes les branches commencant par "origin/\*" seront mises à jour.
 
@@ -183,7 +233,7 @@ git fetch origin
 
 <!-- #region -->
 ```bash
-git branch -a
+git branch -`
 ```
 <!-- #endregion -->
 
@@ -195,9 +245,21 @@ git status
 
 ## Mettre à jour le dépôt distant
 
+Modifier ou créer un fichier et effectuer un nouveau commit.
+
 Votre `commit` sera téléversé sur le serveur git
 - `origin` correspond au dépôt distant
 - `master` la branche que vous souhaitez mettre à jour
+
+par défaut vous êtes sur la branche "master"
+
+<!-- #region -->
+```bash
+git branch -`
+```
+<!-- #endregion -->
+
+"Pousser" vos fichiers sur le serveur.
 
 <!-- #region -->
 ```bash
@@ -209,131 +271,69 @@ git push origin master
 
 <img src="images/fourstages.png" alt="git" width="150px"/>
 
-<!-- #region -->
 ## Fusionner la branche distante avec la branche locale
 
 Si la version distante est en avance sur la version locale, il existe différentes manières de récupérer les modifications:
 
+<!-- #region -->
 ```bash
 git fetch origin
 git merge origin/master
 ```
+<!-- #endregion -->
 
 Les deux étapes précédentes peuvent être effectuées en une seule commande avec
 
+<!-- #region -->
 ```bash
 git pull origin master
 ```
+<!-- #endregion -->
 
 Je déconseille cette approche car avec le `git fetch` on peut anticiper des conflits avec
 
+<!-- #region -->
 ```bash
 git diff origin/master
 ```
+<!-- #endregion -->
 ou en version graphique si l'outil est installé sur votre poste:
 
+<!-- #region -->
 ```bash
 git difftool origin/master
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 ## Résoudre les conflits
 
-- Cette outil permet de choisir les modifications lorsque qu'un fichier a été modifié au même endroit.
+- Cette outil permet de choisir les modifications lorsqu'un fichier a été modifié au même endroit.
 
+<!-- #region -->
 ```bash
 git mergetool
 ```
+<!-- #endregion -->
 
 - En cas de problèmes sur un fichier, vous pouvez annuler toutes les modifications non validées par un *commit* avec :
 
+<!-- #region -->
 ```bash
 git checkout mon_fichier_modif
 ```
+<!-- #endregion -->
 
 - Si vraiment il y a de gros soucis
 
+<!-- #region -->
 ```bash
 git reset --hard
 ```
-
-Attention cette dernière commande, annule tous les changments qui n'ont pas été validés par un *commit*.
 <!-- #endregion -->
 
-## Mettre en place git sur un répertoire existant
+Attention cette dernière commande, annule tous les changements qui n'ont pas été validés par un *commit*.
 
-Imaginons un nouveau répertoire où nous nous allons ajouter un fichier README:
 
-<!-- #region -->
-```bash
-mkdir sandbox
-cd sandbox
-touch README.md
-echo "# Test " >> README.md
-ls
-```
-<!-- #endregion -->
-
-<!-- #region -->
-```bash
-git init
-git status
-```
-<!-- #endregion -->
-
-## Ajouter les fichiers au dépôt git
-
-<!-- #region -->
-```bash
-git add README.md
-git status
-```
-<!-- #endregion -->
-
-<!-- #region -->
-```bash
-git commit -m 'Initial project version'
-```
-<!-- #endregion -->
-
-<!-- #region -->
-## Mettre le dépôt sur GitHub
-
-Créer un dépot github, que nous appelerons `sandbox` :
-- Cliquer sur le '+' en haut à droite et "New repository"
-- Repository name = "sandbox"
-- Laisser les options par défaut
-- Cliquer sur "Create repository"
-
-```bash
-git remote add origin git@github.com:{GITHUB_LOGIN}/sandbox.git
-git fetch origin
-```
-Remplacez {GITHUB_LOGIN}
-
-```bash
-git status
-```
-<!-- #endregion -->
-
-## "Push"
-
-par défaut vous êtes sur la branche "master"
-
-<!-- #region -->
-```bash
-git branch
-```
-<!-- #endregion -->
-
-"Pousser" vos fichiers sur le serveur, l'option `-u` est nécessaire pour le premier push.
-
-<!-- #region -->
-```bash
-git push -u origin master
-```
-<!-- #endregion -->
 
 
 ## Afficher les branches
@@ -352,11 +352,6 @@ Permet de "figer" une version personnelle locale sur laquelle vous pouvez travai
 ```bash
 git branch mabranche
 git checkout mabranche
-```
-<!-- #endregion -->
-
-<!-- #region -->
-```bash
 git branch
 ```
 <!-- #endregion -->
@@ -364,7 +359,7 @@ git branch
 Des fichiers peuvent être différents ou meme inexsitants dans deux branches distinctes mais ils se trouveront au même endroit dans le système de fichiers.
 
 
-## Modifier un fichier
+## Afficher les modifications sur un fichier
 
 <!-- #region -->
 ```bash
@@ -398,8 +393,6 @@ git status
 ```
 <!-- #endregion -->
 
-## Commit
-
 <!-- #region -->
 ```bash
 git commit -m 'Add today date in README'
@@ -427,12 +420,10 @@ git push origin master
 ```
 <!-- #endregion -->
 
-<!-- #region -->
 ## Partager votre travail sur le serveur
 
 
 ## Option 2 : Pousser la branche locale sur le serveur
-<!-- #endregion -->
 
 <!-- #region -->
 ```bash
@@ -473,7 +464,8 @@ Si votre branche locale n'est pas présente sur le serveur, vous pouvez utiliser
 
 ## Stash
 
-Permet d'enregistrer l'état de vos fichiers sans enregistrer les modifications par un `commit`
+Permet d'enregistrer l'état de vos fichiers sans enregistrer les modifications par un `commit`.
+Modifiez un fichier sans effectuer de commit et entrez les commandes suivantes:
 
 <!-- #region -->
 ```bash
