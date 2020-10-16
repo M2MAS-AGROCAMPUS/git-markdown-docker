@@ -9,3 +9,6 @@ default:
 	jupytext --sync 08-exemple-python.py
 	jupytext --sync 09-exemple-r.R
 	jupytext --sync 10-github-action.md
+    
+book:
+	jupyter-book build notebooks
