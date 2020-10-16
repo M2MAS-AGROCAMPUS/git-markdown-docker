@@ -280,6 +280,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gitlab">
+   Gitlab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gestion-distribuee-des-versions">
    Gestion distribuée des versions
   </a>
@@ -295,18 +300,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creer-votre-compte-github">
-   Créer votre compte GitHub
+  <a class="reference internal nav-link" href="#creer-votre-compte-github-et-gitlab">
+   Créer votre compte GitHub et GitLab
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clonage-du-depot">
-   Clonage du dépôt
+  <a class="reference internal nav-link" href="#clonage-d-un-depot-git">
+   Clonage d’un dépôt git
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#verifier-l-etat-du-depot-et-les-fichiers-modifies">
-   Verifier l’état du dépôt et les fichiers modifiés
+  <a class="reference internal nav-link" href="#mettre-en-place-un-depot-git-local">
+   Mettre en place un dépôt git local
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -322,6 +327,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#les-differents-etats-des-fichiers-dans-la-copie-du-depot">
    Les différents états des fichiers dans la copie du dépôt
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mettre-le-depot-sur-github">
+   Mettre le dépôt sur GitHub
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -350,26 +360,6 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mettre-en-place-git-sur-un-repertoire-existant">
-   Mettre en place git sur un répertoire existant
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ajouter-les-fichiers-au-depot-git">
-   Ajouter les fichiers au dépôt git
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mettre-le-depot-sur-github">
-   Mettre le dépôt sur GitHub
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#push">
-   “Push”
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#afficher-les-branches">
    Afficher les branches
   </a>
@@ -380,8 +370,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modifier-un-fichier">
-   Modifier un fichier
+  <a class="reference internal nav-link" href="#afficher-les-modifications-sur-un-fichier">
+   Afficher les modifications sur un fichier
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -391,11 +381,6 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commit">
-   Commit
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
    Commit
   </a>
  </li>
@@ -417,7 +402,7 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
+  <a class="reference internal nav-link" href="#id1">
    Partager votre travail sur le serveur
   </a>
  </li>
@@ -520,8 +505,10 @@
 <li><p>Toutes les modifications sont enregistrées.</p></li>
 <li><p>A tout moment vous pouvez revenir sur une version précédente.</p></li>
 <li><p>Vous pouvez l’utiliser pour quasiment tous les types de fichier.</p></li>
-<li><p>C’est la meilleure approche pour collaborer sur un document.</p></li>
+<li><p>C’est la meilleure approche pour collaborer sur un document tex.</p></li>
 <li><p>Chaque modification est identifiée et datée.</p></li>
+<li><p>Ne convient pas aux fichiers volumineux souvent modifiés</p></li>
+<li><p>N’est pas adapté aux formats non lisibles en mode texte comme le pdf, word ou excel.</p></li>
 </ul>
 </div>
 <div class="section" id="github">
@@ -533,7 +520,22 @@
 <li><p>Github est la plus grande bibliothèque de codes du monde et on y retrouve les meilleures développeurs.</p></li>
 <li><p>Fonctionne de plus en plus comme un réseau social et offre une grande visibilité à vos travaux.</p></li>
 </ul>
-<p>Services équivalents: <a class="reference external" href="https://about.gitlab.com">Gitlab.com</a> et <a class="reference external" href="https://bitbucket.org">Bitbucket</a></p>
+<p>Service équivalent: <a class="reference external" href="https://bitbucket.org">Bitbucket</a></p>
+</div>
+<div class="section" id="gitlab">
+<h2>Gitlab<a class="headerlink" href="#gitlab" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Forge officielle : <a class="reference external" href="https://about.gitlab.com">Gitlab.com</a></p></li>
+<li><p>Gitlab permet d’herberger sa propre instance.</p></li>
+<li><p>Beaucoup d’institutions proposent des instances Gitlab</p>
+<ul>
+<li><p>PLM <a class="reference external" href="https://plmlab.math.cnrs.fr">https://plmlab.math.cnrs.fr</a> (pages, CI)</p></li>
+<li><p>INRIA <a class="reference external" href="https://gitlab.inria.fr">https://gitlab.inria.fr</a> (pages, CI)</p></li>
+<li><p>Université de Rennes 1 <a class="reference external" href="https://gitlab.univ-rennes1.fr">https://gitlab.univ-rennes1.fr</a> (~~pages~~, ~~CI~~)</p></li>
+<li><p>INSA Rennes <a class="reference external" href="https://gitlab.insa-rennes.fr">https://gitlab.insa-rennes.fr</a>(~~pages~~, ~~CI~~)</p></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="gestion-distribuee-des-versions">
 <h2>Gestion distribuée des versions<a class="headerlink" href="#gestion-distribuee-des-versions" title="Permalink to this headline">¶</a></h2>
@@ -552,8 +554,8 @@
 <li><p>Configuration: Il faut renseigner votre identité avec votre adresse de messagerie.</p></li>
 </ul>
 <p>Ouvrir la console « Git bash »:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name “Prenom Nom<span class="s2">&quot;</span>
-<span class="s2">git config --global user.email “prenom.nom@domaine.fr&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name “Pierre Navaro<span class="s2">&quot;</span>
+<span class="s2">git config --global user.email “pierre.navaro@univ-rennes1.fr`</span>
 </pre></div>
 </div>
 <p>Utiliser la même adresse que pour votre compte GitHub. Verifier la configuration avec:</p>
@@ -577,35 +579,47 @@
 </div>
 <p>Appuyer sur “enter” (conseillé) ou saisir un mot de passe.  Deux fichiers on été créés : un clé publique et une clé privée. La clé publique sera celle que l’on pourra partager et la clé privée ne doit être communiquée sous aucun prétexte, elle est comme un mot de passe. Si vous la perdez vous devrez recommencer la procédure.</p>
 </div>
-<div class="section" id="creer-votre-compte-github">
-<h2>Créer votre compte GitHub<a class="headerlink" href="#creer-votre-compte-github" title="Permalink to this headline">¶</a></h2>
-<p>Il suffit de cliquer en haut à droite sur <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">Up</span></code>. Ajouter votre clé publique dans votre profile (Settings -&gt; SSH and GPG keys -&gt; New SSH key)</p>
-<p>Une fois que le compte a été créé allez sur le dépot <a class="reference external" href="https://github.com/pnavaro/agrocampus">https://github.com/pnavaro/agrocampus</a> et cliquez sur <code class="docutils literal notranslate"><span class="pre">Fork</span></code> en haut à droite.</p>
-<p>Vous aurez une copie de ces transparents sur votre compte GitHub que vous pourrez modifier.</p>
+<div class="section" id="creer-votre-compte-github-et-gitlab">
+<h2>Créer votre compte GitHub et GitLab<a class="headerlink" href="#creer-votre-compte-github-et-gitlab" title="Permalink to this headline">¶</a></h2>
+<p>GitHub: Il suffit de cliquer en haut à droite sur <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">Up</span></code>. Ajouter votre clé publique dans votre profile (Settings -&gt; SSH and GPG keys -&gt; New SSH key)</p>
+<p>Gitlab: En haut à droite, dans le profile il y a un menu <code class="docutils literal notranslate"><span class="pre">Settings</span></code> qui contient un onglet <code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Keys</span></code>.</p>
 </div>
-<div class="section" id="clonage-du-depot">
-<h2>Clonage du dépôt<a class="headerlink" href="#clonage-du-depot" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/<span class="o">{</span>GITHUB_LOGIN<span class="o">}</span>/agrocampus.git
+<div class="section" id="clonage-d-un-depot-git">
+<h2>Clonage d’un dépôt git<a class="headerlink" href="#clonage-d-un-depot-git" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@plmlab.math.cnrs.fr:irmar/git-markdown-docker.git
+ls git-markdown-docker
 </pre></div>
 </div>
+<p>Vous aurez une copie de ces transparents sur votre ordinateur.</p>
 </div>
-<div class="section" id="verifier-l-etat-du-depot-et-les-fichiers-modifies">
-<h2>Verifier l’état du dépôt et les fichiers modifiés<a class="headerlink" href="#verifier-l-etat-du-depot-et-les-fichiers-modifies" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> agrocampus
+<div class="section" id="mettre-en-place-un-depot-git-local">
+<h2>Mettre en place un dépôt git local<a class="headerlink" href="#mettre-en-place-un-depot-git-local" title="Permalink to this headline">¶</a></h2>
+<p>Créons un nouveau répertoire où nous nous allons ajouter un fichier README:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$HOME</span>
+mkdir monprojet
+<span class="nb">cd</span> monprojet
+touch README.md
+<span class="nb">echo</span> <span class="s2">&quot;# Mon Projet &quot;</span> &gt;&gt; README.md
+ls
+</pre></div>
+</div>
+<p>Création du dépôt git:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init
 git status
 </pre></div>
 </div>
 </div>
 <div class="section" id="ajouter-un-fichier-dans-l-index">
 <h2>Ajouter un fichier dans l’index<a class="headerlink" href="#ajouter-un-fichier-dans-l-index" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch test.md
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch index.m<span class="sb">`</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
 </pre></div>
 </div>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">add</span></code> est nécessaire pour un nouveau fichier mais aussi pour un fichier qui a été modifié.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add test.md
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add index.md
+<span class="nb">echo</span> <span class="s2">&quot;# Titre du projet&quot;</span> &gt;&gt; index.md
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
@@ -614,7 +628,7 @@ git status
 </div>
 <div class="section" id="validation-et-sauvegarde-commit">
 <h2>Validation et sauvegarde (commit)<a class="headerlink" href="#validation-et-sauvegarde-commit" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s1">&#39;Create the file touch.md&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s1">&#39;Create the file index.md&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
@@ -625,14 +639,33 @@ git status
 <h2>Les différents états des fichiers dans la copie du dépôt<a class="headerlink" href="#les-differents-etats-des-fichiers-dans-la-copie-du-depot" title="Permalink to this headline">¶</a></h2>
 <a class="bg-primary reference internal image-reference" href="_images/18333fig0201-tn.png"><img alt="git" class="bg-primary" src="_images/18333fig0201-tn.png" style="width: 450px;" /></a>
 </div>
+<div class="section" id="mettre-le-depot-sur-github">
+<h2>Mettre le dépôt sur GitHub<a class="headerlink" href="#mettre-le-depot-sur-github" title="Permalink to this headline">¶</a></h2>
+<p>Créer un dépot github, que nous appelerons <code class="docutils literal notranslate"><span class="pre">mon_projet</span></code> :</p>
+<ul class="simple">
+<li><p>Cliquer sur le ‘+’ en haut à droite et “New repository”</p></li>
+<li><p>Repository name = “mon_projet”</p></li>
+<li><p>Laisser les options par défaut</p></li>
+<li><p>Cliquer sur “Create repository”</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add origin git@github.com:<span class="o">{</span>GITHUB_LOGIN<span class="o">}</span>/mon_projet.git
+git push -u origin master
+</pre></div>
+</div>
+<p>Remplacer <code class="docutils literal notranslate"><span class="pre">{GITHUB_LOGIN}</span></code> par votre login github.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+</pre></div>
+</div>
+</div>
 <div class="section" id="synchroniser-avec-la-version-distante-sur-le-depot">
 <h2>Synchroniser avec la version distante sur le dépôt<a class="headerlink" href="#synchroniser-avec-la-version-distante-sur-le-depot" title="Permalink to this headline">¶</a></h2>
-<p>La commande suivante permet de rappatrier toutes les modifications sur le dépôt distant (remote) sans modifier
+<p>Vous pouvez modifier les fichiers directement sur le site GitHub.
+La commande suivante permet de rappatrier toutes les modifications sur le dépôt distant (remote) sans modifier
 votre version locale. Toutes les branches commencant par “origin/*” seront mises à jour.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch origin
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch -a
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch -<span class="sb">`</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
@@ -641,11 +674,17 @@ votre version locale. Toutes les branches commencant par “origin/*” seront m
 </div>
 <div class="section" id="mettre-a-jour-le-depot-distant">
 <h2>Mettre à jour le dépôt distant<a class="headerlink" href="#mettre-a-jour-le-depot-distant" title="Permalink to this headline">¶</a></h2>
+<p>Modifier ou créer un fichier et effectuer un nouveau commit.</p>
 <p>Votre <code class="docutils literal notranslate"><span class="pre">commit</span></code> sera téléversé sur le serveur git</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">origin</span></code> correspond au dépôt distant</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">master</span></code> la branche que vous souhaitez mettre à jour</p></li>
 </ul>
+<p>par défaut vous êtes sur la branche “master”</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch -<span class="sb">`</span>
+</pre></div>
+</div>
+<p>“Pousser” vos fichiers sur le serveur.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin master
 </pre></div>
 </div>
@@ -677,7 +716,7 @@ git merge origin/master
 <div class="section" id="resoudre-les-conflits">
 <h2>Résoudre les conflits<a class="headerlink" href="#resoudre-les-conflits" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Cette outil permet de choisir les modifications lorsque qu’un fichier a été modifié au même endroit.</p></li>
+<li><p>Cette outil permet de choisir les modifications lorsqu’un fichier a été modifié au même endroit.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git mergetool
 </pre></div>
@@ -694,61 +733,7 @@ git merge origin/master
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reset --hard
 </pre></div>
 </div>
-<p>Attention cette dernière commande, annule tous les changments qui n’ont pas été validés par un <em>commit</em>.</p>
-</div>
-<div class="section" id="mettre-en-place-git-sur-un-repertoire-existant">
-<h2>Mettre en place git sur un répertoire existant<a class="headerlink" href="#mettre-en-place-git-sur-un-repertoire-existant" title="Permalink to this headline">¶</a></h2>
-<p>Imaginons un nouveau répertoire où nous nous allons ajouter un fichier README:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir sandbox
-<span class="nb">cd</span> sandbox
-touch README.md
-<span class="nb">echo</span> <span class="s2">&quot;# Test &quot;</span> &gt;&gt; README.md
-ls
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init
-git status
-</pre></div>
-</div>
-</div>
-<div class="section" id="ajouter-les-fichiers-au-depot-git">
-<h2>Ajouter les fichiers au dépôt git<a class="headerlink" href="#ajouter-les-fichiers-au-depot-git" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add README.md
-git status
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s1">&#39;Initial project version&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="mettre-le-depot-sur-github">
-<h2>Mettre le dépôt sur GitHub<a class="headerlink" href="#mettre-le-depot-sur-github" title="Permalink to this headline">¶</a></h2>
-<p>Créer un dépot github, que nous appelerons <code class="docutils literal notranslate"><span class="pre">sandbox</span></code> :</p>
-<ul class="simple">
-<li><p>Cliquer sur le ‘+’ en haut à droite et “New repository”</p></li>
-<li><p>Repository name = “sandbox”</p></li>
-<li><p>Laisser les options par défaut</p></li>
-<li><p>Cliquer sur “Create repository”</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add origin git@github.com:<span class="o">{</span>GITHUB_LOGIN<span class="o">}</span>/sandbox.git
-git fetch origin
-</pre></div>
-</div>
-<p>Remplacez {GITHUB_LOGIN}</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
-</pre></div>
-</div>
-</div>
-<div class="section" id="push">
-<h2>“Push”<a class="headerlink" href="#push" title="Permalink to this headline">¶</a></h2>
-<p>par défaut vous êtes sur la branche “master”</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch
-</pre></div>
-</div>
-<p>“Pousser” vos fichiers sur le serveur, l’option <code class="docutils literal notranslate"><span class="pre">-u</span></code> est nécessaire pour le premier push.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push -u origin master
-</pre></div>
-</div>
+<p>Attention cette dernière commande, annule tous les changements qui n’ont pas été validés par un <em>commit</em>.</p>
 </div>
 <div class="section" id="afficher-les-branches">
 <h2>Afficher les branches<a class="headerlink" href="#afficher-les-branches" title="Permalink to this headline">¶</a></h2>
@@ -761,15 +746,13 @@ git fetch origin
 <p>Permet de “figer” une version personnelle locale sur laquelle vous pouvez travailler sans modifier la branche principale “master”.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch mabranche
 git checkout mabranche
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch
+git branch
 </pre></div>
 </div>
 <p>Des fichiers peuvent être différents ou meme inexsitants dans deux branches distinctes mais ils se trouveront au même endroit dans le système de fichiers.</p>
 </div>
-<div class="section" id="modifier-un-fichier">
-<h2>Modifier un fichier<a class="headerlink" href="#modifier-un-fichier" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="afficher-les-modifications-sur-un-fichier">
+<h2>Afficher les modifications sur un fichier<a class="headerlink" href="#afficher-les-modifications-sur-un-fichier" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>date &gt;&gt; README.md
 </pre></div>
 </div>
@@ -788,15 +771,12 @@ git checkout mabranche
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
 </pre></div>
 </div>
-</div>
-<div class="section" id="commit">
-<h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s1">&#39;Add today date in README&#39;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Commit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="commit">
+<h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
 <p><img alt="index1" src="_images/index1.png" /></p>
 </div>
 <div class="section" id="fast-commit">
@@ -814,8 +794,8 @@ git push origin master
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>Partager votre travail sur le serveur<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Partager votre travail sur le serveur<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="option-2-pousser-la-branche-locale-sur-le-serveur">
 <h2>Option 2 : Pousser la branche locale sur le serveur<a class="headerlink" href="#option-2-pousser-la-branche-locale-sur-le-serveur" title="Permalink to this headline">¶</a></h2>
@@ -847,7 +827,8 @@ git merge master
 </div>
 <div class="section" id="stash">
 <h2>Stash<a class="headerlink" href="#stash" title="Permalink to this headline">¶</a></h2>
-<p>Permet d’enregistrer l’état de vos fichiers sans enregistrer les modifications par un <code class="docutils literal notranslate"><span class="pre">commit</span></code></p>
+<p>Permet d’enregistrer l’état de vos fichiers sans enregistrer les modifications par un <code class="docutils literal notranslate"><span class="pre">commit</span></code>.
+Modifiez un fichier sans effectuer de commit et entrez les commandes suivantes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git stash
 git stash show
 </pre></div>
